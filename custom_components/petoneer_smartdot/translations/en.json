@@ -1,0 +1,39 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Petoneer SmartDot Bluetooth",
+        "description": "Control a Petoneer SmartDot devices. Select to scan for devices or enter the MAC address manually.",
+        "data": {
+          "entry_method": "Method to be used:"
+        }
+      },
+      "scan": {
+        "title": "Petoneer SmartDot Bluetooth",
+        "description": "Make sure the Petoneer SmartDot device is not connected to other devices or it may not be discoverable (A reset may also help).  Are you ready to start scanning?"
+      },
+      "device": {
+        "title": "Petoneer SmartDot Bluetooth",
+        "description": "Enter a name for the device and the MAC address for the Petoneer SmartDot device.",
+        "data": {
+          "name": "Device Name",
+          "mac": "MAC address"
+        }
+      }
+    },
+    "abort": {
+      "no_devices_found": "No devices found during this scan. Ensure the Petoneer SmartDot device is not connected to another app."
+    }
+  },
+  "entity": {
+    "select": {
+      "preset": {
+        "state": {
+          "small": "Small",
+          "medium": "Medium",
+          "large": "Large"
+        }
+      }
+    }
+  }
+}

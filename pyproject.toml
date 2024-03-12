@@ -1,0 +1,17 @@
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "C90",
+          "I", "N", "S", "B", "A",
+          "ISC", "T20", "Q", "PTH"]
+ignore = ["A003", "C901", "E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"

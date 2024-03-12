@@ -1,0 +1,18 @@
+{
+  "domain": "petoneer_smartdot",
+  "name": "Petoneer SmartDot",
+  "bluetooth": [
+    {
+      "connectable": true,
+      "local_name": "PetCat"
+    }
+  ],
+  "codeowners": ["@verdel"],
+  "config_flow": true,
+  "dependencies": ["bluetooth"],
+  "documentation": "https://github.com/verdel/hass-petoneer-smartdot",
+  "iot_class": "assumed_state",
+  "issue_tracker": "https://github.com/verdel/hass-petoneer-smartdot/issues",
+  "requirements": ["bleak-retry-connector"],
+  "version": "0.1.0"
+}
