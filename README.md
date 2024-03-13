@@ -68,11 +68,17 @@ Please ensure the following steps prior to adding a new SmartDot:
 - The SmartDot must NOT be connected with the official app (or any other device), else HA will not be able to discover it, nor connect to it.
 - Some HA integrations still use some bluetooth libraries that take full control of the physical bluetooth adapter, in that case, other ble integration will not have access to it. So to test this component, best to disable all other ble integrations if you are unsure what ble lib they are using.
 
+# Additional information
+
+Unfortunately, the Petoneer SmartDot does not have a feedback function. Therefore, it is not possible to obtain the current state (on/off).
+
+After installing the integration, you will be able to choose the size of the area within which the dot will move, and there will be two buttons for starting and stopping the dot's movement.
+
 # Debugging
 
 Please ensure the following:
 
-1. the petoneer_smartdot integration has been removed from HA.
+1. The Petoneer SmartDot integration has been removed from HA.
 2. HA has access to the bluetooth adapter (follow the section above in not on HAOS).
 3. No other bluetooth integration are using something else than bleak library for bluetooth. If unsure, disable them.
 4. The logging has been changed in HA to allow debugging of this component and bleak:
@@ -92,8 +98,8 @@ Please ensure the following:
    NOTE: this will generate A LOT of debugging messages in the logs, so it is not recommended to use for a long time
 
 5. Restart HA
-6. Reinstall the petoneer_smartdot integration and find the SmartDot through a scan.
-7. check the logs and report. Thanks
+6. Reinstall the Petoneer SmartDot integration and find the SmartDot through a scan.
+7. Check the logs and report. Thanks
 
 # Other info
 
