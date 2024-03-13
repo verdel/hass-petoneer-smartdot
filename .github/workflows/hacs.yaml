@@ -10,24 +10,23 @@ on:
 
 jobs:
   hacs:
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
     name: HACS
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
 
       - name: HACS validation
-        uses: "hacs/action@22.5.0"
+        uses: hacs/action@22.5.0
         with:
-          category: "integration"
-          ignore: brands
+          category: integration
 
   hassfest:
-    runs-on: "ubuntu-latest"
+    runs-on: ubuntu-latest
     name: Hassfest
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
 
       - name: Hassfest validation
-        uses: "home-assistant/actions/hassfest@master"
+        uses: home-assistant/actions/hassfest@master
