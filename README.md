@@ -74,6 +74,14 @@ Unfortunately, the Petoneer SmartDot does not have a feedback function. Therefor
 
 After installing the integration, you will be able to choose the size of the area within which the dot will move, and there will be two buttons for starting and stopping the dot's movement.
 
+# Limitation in supported firmware versions
+
+Unfortunately, at some point the manufacturer changed the interaction protocol with the Petoneer Smart Dot. Currently, I have not been able to figure out what the content of the Bluetooth packets that activate each type of game should be.
+
+It is known for certain that this integration works with firmware version `1.09` and does not work with version `1.2`.
+
+More detailed information is provided in the [issue](https://github.com/verdel/hass-petoneer-smartdot/issues/2).
+
 # Debugging
 
 Please ensure the following:
