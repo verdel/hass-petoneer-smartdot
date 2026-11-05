@@ -1,8 +1,11 @@
 # Home Assistant custom component for Petoneer SmartDot
 
-This is a custom component for Home Assistant that allows the control of the Petoneer SmartDot via bluetooth.
+This custom component controls both the original Petoneer SmartDot and SmartDot V2 locally via Bluetooth.
 
 ![Petoneer SmartDot](assets/petoneer-smartdot.png)
+
+Requires Home Assistant **2026.10 or newer** and a Bluetooth adapter or an **active ESPHome Bluetooth proxy**.
+Existing original SmartDot entries are migrated automatically, preserving their entities.
 
 # Installation
 
@@ -28,10 +31,11 @@ This repo is now in [HACS](https://hacs.xyz/).
 
 ## Ensure Host bluetooth is accessible from Home-Assistant
 
-Since version 1.0.0, this component uses the [`bleak`](https://github.com/hbldh/bleak) python library to access bluetooth (as bluepy is not supported from HA 2022.07+). In order to scan and interact with bluetooth devices, bluez utility needs to be installed and the correct permissions must be given to HA:
+This component uses [`bleak`](https://github.com/hbldh/bleak) to access Bluetooth through Home Assistant.
+For a local Linux adapter, BlueZ must be installed and accessible to HA:
 
 - for **Home Assistant Operating System**:
-  It should be all setup, at least for HA 2022.7+
+  Bluetooth support is included; configure the Bluetooth integration in HA.
 
 - For **Home Assistant Container** in docker:
 
@@ -56,12 +60,28 @@ Since version 1.0.0, this component uses the [`bleak`](https://github.com/hbldh/
 
 ## Adding the device to HA
 
-You must have the `bluetooth` integration enabled and configured (HA 2022.8+) or a connected ESPhome device running the bluetooth proxy (HA 2022.10+). The Petoneer SmartDot should be automatically discovered and you will receive a notification prompting you to add it.
+You must have the `bluetooth` integration enabled and configured or an ESPHome device running an active Bluetooth proxy.
+A proxy that only forwards advertisements cannot control the toy. A nearby SmartDot may also be offered through automatic discovery.
 
 The devices can also be added through the `integration menu` UI:
 
-- In Configuration/Integrations click on the + button, select `Petoneer SmartDot` and you can either scan for the devices or configure the name and mac address manually on the form.
-  The SmartDot is automatically added and a device is created.
+- Go to **Settings → Devices & services → Add integration → Petoneer SmartDot**.
+- Choose a nearby device, or enter its Bluetooth address and select the device generation manually.
+  On macOS, use the complete CoreBluetooth UUID instead of a MAC address.
+- The original SmartDot requires no Petoneer account or keys. For V2, complete the account setup below.
+
+### Connecting SmartDot V2
+
+1. Add the toy to the official **Petoneer** app, then close the app to release its Bluetooth connection.
+2. Select the toy in Home Assistant, or enter its Bluetooth address and choose **SmartDot V2**.
+3. Enter your Petoneer email and password.
+   Leave the cloud region on **Automatic**, or select the account's region explicitly if needed.
+4. Select your SmartDot V2 from the account's device list. All account devices are shown without filtering by product ID;
+   choose the toy matching the Bluetooth device selected earlier. Other Petoneer products are not supported by this integration.
+5. The integration retrieves the selected device's keys and checks BLE authentication without starting a game.
+
+The password and cloud session are not saved. Only the selected device's keys and configuration are stored in HA;
+normal control uses local Bluetooth. To refresh keys, open the integration entry's **Reconfigure** menu and log in again.
 
 Please ensure the following steps prior to adding a new SmartDot:
 
@@ -70,23 +90,30 @@ Please ensure the following steps prior to adding a new SmartDot:
 
 # Additional information
 
-Unfortunately, the Petoneer SmartDot does not have a feedback function. Therefore, it is not possible to obtain the current state (on/off).
+The integration does not expose a reliable current playing/on/off state. V2 acknowledges commands and reports datapoints,
+but the last selected game area alone does not indicate whether a game is still running.
 
 After installing the integration, you will be able to choose the size of the area within which the dot will move, and there will be two buttons for starting and stopping the dot's movement.
+Choosing a game area does not start a game; press **Start** to launch it.
+For V2, **Stop** stops any of the three automatic games.
 
-# Limitation in supported firmware versions
+# Supported firmware versions
 
-Unfortunately, at some point the manufacturer changed the interaction protocol with the Petoneer Smart Dot. Currently, I have not been able to figure out what the content of the Bluetooth packets that activate each type of game should be.
+The two generations use different Bluetooth protocols:
 
-It is known for certain that this integration works with firmware version `1.09` and does not work with version `1.2`.
+| Generation | Verified firmware | Protocol |
+| --- | --- | --- |
+| Original SmartDot | `1.09` | Original FFF3 commands |
+| SmartDot V2 | `1.2` | Encrypted Tuya BLE FD50, protocol 4.2 |
 
-More detailed information is provided in the [issue](https://github.com/verdel/hass-petoneer-smartdot/issues/2).
+When setting up V2, select your SmartDot from the Petoneer account's device list. Other Petoneer products are not supported.
+The integration checks the device's keys and Bluetooth authentication before completing setup.
 
 # Debugging
 
 Please ensure the following:
 
-1. The Petoneer SmartDot integration has been removed from HA.
+1. The official Petoneer app is closed and no other client is connected to the toy.
 2. HA has access to the bluetooth adapter (follow the section above in not on HAOS).
 3. No other bluetooth integration are using something else than bleak library for bluetooth. If unsure, disable them.
 4. The logging has been changed in HA to allow debugging of this component and bleak:
@@ -106,8 +133,8 @@ Please ensure the following:
    NOTE: this will generate A LOT of debugging messages in the logs, so it is not recommended to use for a long time
 
 5. Restart HA
-6. Reinstall the Petoneer SmartDot integration and find the SmartDot through a scan.
-7. Check the logs and report. Thanks
+6. Reload the integration and reproduce the problem. If V2 keys need updating, use **Reconfigure**.
+7. Check the logs and report. Do not share device keys, passwords or HA configuration backups.
 
 # Other info
 
