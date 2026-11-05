@@ -23,7 +23,7 @@
   "iot_class": "local_push",
   "issue_tracker": "https://github.com/verdel/hass-petoneer-smartdot/issues",
   "requirements": [
-    "bleak-retry-connector==4.7.1",
+    "bleak-retry-connector>=4.7.1",
     "tuya-mobile==1.2.0"
   ],
   "version": "0.2.0"
