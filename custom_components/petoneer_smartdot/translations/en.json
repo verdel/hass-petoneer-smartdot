@@ -1,28 +1,92 @@
 {
+  "title": "Petoneer SmartDot",
   "config": {
     "step": {
       "user": {
-        "title": "Petoneer SmartDot Bluetooth",
-        "description": "Control a Petoneer SmartDot devices. Select to scan for devices or enter the MAC address manually.",
-        "data": {
-          "entry_method": "Method to be used:"
+        "title": "Petoneer SmartDot",
+        "menu_options": {
+          "scan": "Choose a nearby device",
+          "manual": "Enter a Bluetooth address"
         }
       },
       "scan": {
-        "title": "Petoneer SmartDot Bluetooth",
-        "description": "Make sure the Petoneer SmartDot device is not connected to other devices or it may not be discoverable (A reset may also help).  Are you ready to start scanning?"
+        "title": "Find SmartDot",
+        "description": "Close Petoneer on your phone. Make sure your Bluetooth adapter or active Bluetooth proxy can see the device, then retry."
       },
       "device": {
-        "title": "Petoneer SmartDot Bluetooth",
-        "description": "Enter a name for the device and the MAC address for the Petoneer SmartDot device.",
+        "title": "Choose SmartDot",
+        "description": "Original SmartDot devices use PetCat. V2 devices advertise Tuya FD50, often as TY. V2 account credentials will be checked against the selected Bluetooth device.",
         "data": {
-          "name": "Device Name",
-          "mac": "MAC address"
+          "mac": "Bluetooth device",
+          "name": "Name (optional)"
+        }
+      },
+      "manual": {
+        "title": "Device and generation",
+        "description": "Enter the complete Bluetooth address. On macOS, use the full CoreBluetooth UUID.",
+        "data": {
+          "mac": "Bluetooth address",
+          "generation": "Device generation",
+          "name": "Name (optional)"
+        }
+      },
+      "account": {
+        "title": "Get SmartDot V2 keys",
+        "description": "Enter your Petoneer account email and password. The password is used only during setup and is not saved. The cloud is used to retrieve keys; everyday control uses local Bluetooth.",
+        "data": {
+          "username": "Petoneer email",
+          "password": "Petoneer password",
+          "region": "Cloud region"
+        }
+      },
+      "cloud_device": {
+        "title": "Choose your SmartDot V2",
+        "description": "All devices from your Petoneer account are listed. Choose the SmartDot V2 matching the Bluetooth device selected earlier. Close Petoneer on your phone: the integration will validate its keys over Bluetooth without starting a game.",
+        "data": {
+          "cloud_device": "Petoneer device"
         }
       }
     },
+    "error": {
+      "invalid_address": "Enter a valid Bluetooth MAC address or complete CoreBluetooth UUID.",
+      "no_devices_found": "No candidate devices are visible. Close the phone app, check active Bluetooth connections, then retry.",
+      "invalid_region": "Choose a supported cloud region or Automatic.",
+      "cannot_connect": "Cannot reach the Petoneer/Tuya API. Check network connectivity or try the account cloud region.",
+      "invalid_auth": "The email/password or account region was rejected. Check your login details and cloud region before retrying.",
+      "captcha_required": "Petoneer requires a captcha. Complete verification in the official app, then try again.",
+      "mfa_required": "Petoneer requires an additional verification step. Complete it in the official app, then try again.",
+      "account_locked": "The account is temporarily locked. Stop retrying and check the official app.",
+      "profile_expired": "The server rejected this version of the Petoneer application profile. Update the integration.",
+      "cloud_error": "The Petoneer API returned an unsupported response. No password or session was saved.",
+      "no_cloud_devices": "No devices were found in this account/region.",
+      "device_not_found": "This device was not returned by the authenticated account.",
+      "missing_keys": "The API did not return the required identifiers and local key for this device.",
+      "cannot_connect_ble": "Cannot authenticate the selected Bluetooth device. Close the phone app, verify the chosen device, and check active Bluetooth/proxy access. No game was started.",
+      "unsupported_api": "This mobile API operation is not supported."
+    },
     "abort": {
-      "no_devices_found": "No devices found during this scan. Ensure the Petoneer SmartDot device is not connected to another app."
+      "already_configured": "This Bluetooth device is already configured.",
+      "not_supported": "This advertisement is not a supported SmartDot candidate.",
+      "reauth_successful": "Device keys updated successfully.",
+      "reconfigure_successful": "Device configuration updated successfully."
+    }
+  },
+  "selector": {
+    "generation": {
+      "options": {
+        "v1": "Original SmartDot (V1)",
+        "v2": "SmartDot V2 (Tuya BLE)"
+      }
+    },
+    "region": {
+      "options": {
+        "auto": "Automatic",
+        "europe": "Europe",
+        "america": "America",
+        "singapore": "Singapore",
+        "china": "China",
+        "india": "India"
+      }
     }
   },
   "entity": {

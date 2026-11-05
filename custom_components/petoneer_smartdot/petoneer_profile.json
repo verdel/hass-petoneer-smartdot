@@ -1,0 +1,23 @@
+{
+  "name": "Petoneer Android 3.5.8",
+  "app_id": "pnsnepdj7d88t4jvhv49",
+  "app_secret": "rxtgkduqgm4nsvvmf79t9aafyraq5h83",
+  "cert_sha256_hex": "0aafc5d9e98f8f819e5aacd9a2d8792fae12f4ad0606bb20adc1ad4f1c6d5012",
+  "app_key": "smqet59rqh7av45a9vunc9etmdhmkpff",
+  "package": "com.petoneer.pet",
+  "app_version": "3.5.8",
+  "ttid": "sdk_international@pnsnepdj7d88t4jvhv49",
+  "sdk_version": "7.5.0",
+  "device_core_version": "7.5.0",
+  "os_system": "14",
+  "platform": "Android",
+  "channel": "sdk",
+  "et": "3",
+  "endpoints": [
+    "https://a1.tuyaeu.com/api.json",
+    "https://a1.tuyaus.com/api.json",
+    "https://a1-sg.iotbing.com/api.json",
+    "https://a1.tuyacn.com/api.json",
+    "https://a1.tuyain.com/api.json"
+  ]
+}
