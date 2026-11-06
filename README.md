@@ -139,3 +139,9 @@ Please ensure the following:
 # Other info
 
 Originally based on the work by Marco Colombo [hass-addon-petoneer-smartdot](https://github.com/marcomow/hass-addon-petoneer-smartdot).
+
+## License and third-party notices
+
+This project is licensed under the [MIT License](LICENSE).
+See [Third-party notices](THIRD_PARTY_NOTICES.md) for dependency licenses,
+acknowledgements, and the provenance of the Petoneer application profile.
